@@ -15,7 +15,8 @@
 
 
   <div class="field">
-    <%= f.label :type %><br />
+    <%= f.label :user_type %><br />
+    <%= f.select :user_type, options_for_select(User.user_types.keys) %>
   </div>
 
   <div class="field">
