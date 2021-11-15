@@ -1,19 +1,16 @@
 <h1>Welcome to BugZilla</h1>
-
 	<% if current_user %>
-		<% @myusers.each do |user| %>
-			<p> <%= user.user_type %> </p>
-		<% end %>
+		<%=link_to '<button type="button">Users</button>'.html_safe, userpage_path%>
 		<br>
 		<br>
-	    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
+		<%=link_to '<button type="button">Projects</button>'.html_safe, projecthome_path%>
+		<br>
+		<br>
+	    <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path, method: :delete %>
 	<%else %>
-	    <%= link_to "Register", new_user_registration_path %>
+	 	<%= link_to '<button type="button">Signup</button>'.html_safe,new_user_registration_path %>
 	    <br>
 		<br>
-	    <%= link_to "Login", new_user_session_path %>
+	    <%= link_to '<button type="button">login</button>'.html_safe, new_user_session_path %>
 	<% end %>
-
-<br>
-<br>
-	

@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   def home
-    @myusers = User.all
+  end
+
+  def userpage
+      @myusers = User.all
   end
 end

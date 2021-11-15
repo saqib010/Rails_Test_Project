@@ -5,11 +5,9 @@ one:
   description: MyText
   screenshot: MyString
   type: 
-  status: 
 
 two:
   title: MyString
   description: MyText
   screenshot: MyString
   type: 
-  status: 

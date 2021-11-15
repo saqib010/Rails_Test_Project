@@ -30,6 +30,13 @@ user_type: 2
 
 puts "1 Manager created"
 
+
+Project.create!(
+name: "proj1"
+		)
+
+puts "1 Project created"
+
 =begin
 3.times do |dev|
 	User.create!(
