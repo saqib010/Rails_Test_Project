@@ -4,7 +4,10 @@
 		<br>
 		<br>
 
-		<%=link_to '<button type="button">Projects</button>'.html_safe, projecthome_path%>
+		<%=link_to '<button type="button">Projects</button>'.html_safe, projects_path%>
+		<br>
+		<br>
+		<%=link_to '<button type="button">Bugs</button>'.html_safe, bugs_path%>
 		<br>
 		<br>
 	    <%= link_to '<button type="button">Logout</button>'.html_safe, destroy_user_session_path, method: :delete %>

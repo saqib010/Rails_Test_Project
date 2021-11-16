@@ -1,5 +1,3 @@
-
-
 User.create!(
 name: "dev1",
 email:"1dev@gmail.com",
@@ -36,6 +34,19 @@ name: "proj1"
 		)
 
 puts "1 Project created"
+
+
+3.times do |bug|
+
+	Bug.create!(
+		title: "bug #{bug}",
+		description:"description #{bug}",
+		screenshot: "ss #{bug}",
+		bugtype: "type#{bug}"
+		)
+end
+
+puts "3 Bugs created"
 
 =begin
 3.times do |dev|

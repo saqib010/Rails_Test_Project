@@ -1,38 +1,65 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :home]
-  def home
-    @myprojects = Project.all
+  before_action :set_project, only: %i[ show edit update destroy ]
+
+  # GET /projects or /projects.json
+  def index
+    @projects = Project.all
   end
 
-  def new
-    @myproject = Project.new
-    # adding new field for multiple attributes of techologies 
-  end
-
+  # GET /projects/1 or /projects/1.json
   def show
-    find
   end
 
-  def create
-    @myproject = Project.new(proj_params)
+  # GET /projects/new
+  def new
+    @project = Project.new
+  end
 
-    #@myproject.user = current_user
+  # GET /projects/1/edit
+  def edit
+  end
+
+  # POST /projects or /projects.json
+  def create
+    @project = Project.new(project_params)
 
     respond_to do |format|
-      if @myproject.save
-        format.html { redirect_to @myproject, notice: "Project was successfully created." }
+      if @project.save
+        format.html { redirect_to @project, notice: "Project was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
-  def proj_params
-     params.permit(:name)
-  end
-  
-  def find
-    @myproject = Project.find(params[:id])
+  # PATCH/PUT /projects/1 or /projects/1.json
+  def update
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html { redirect_to @project, notice: "Project was successfully updated." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
   end
 
+  # DELETE /projects/1 or /projects/1.json
+  def destroy
+    @project.destroy
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_project
+      @project = Project.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def project_params
+      params.require(:project).permit(:name)
+    end
 end

@@ -1,5 +1,7 @@
-<h1>Created Project</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
 
-<h3>:: <%= @myproject.name %> ::</h3>
-<br>
-<%=link_to '<button type="button">Back</button>'.html_safe, projecthome_path%>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
