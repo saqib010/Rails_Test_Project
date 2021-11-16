@@ -42,7 +42,7 @@ puts "1 Project created"
 		title: "bug #{bug}",
 		description:"description #{bug}",
 		screenshot: "ss #{bug}",
-		bugtype: "type#{bug}"
+		bugtype: false
 		)
 end
 

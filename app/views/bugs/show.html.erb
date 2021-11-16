@@ -12,13 +12,12 @@
 
 <p>
   <strong>Screenshot:</strong>
-  <%= @bug.screenshot %>
+      <%= image_tag @bug.screenshot.url if @bug.screenshot? %>
 </p>
-
 <p>
   <strong>Type:</strong>
   <%= @bug.bugtype %>
 </p>
-
+<br>
 <%= link_to 'Edit', edit_bug_path(@bug) %> |
 <%= link_to 'Back', bugs_path %>

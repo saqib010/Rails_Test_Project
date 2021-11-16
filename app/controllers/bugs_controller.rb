@@ -1,6 +1,5 @@
 class BugsController < ApplicationController
   before_action :set_bug, only: %i[ show edit update destroy ]
-
   # GET /bugs or /bugs.json
   def index
     @bugs = Bug.all
@@ -64,6 +63,6 @@ class BugsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bug_params
-      params.require(:bug).permit(:title, :description, :screenshot, :type)
+      params.require(:bug).permit(:title, :description, :screenshot, :bugtype)
     end
 end
