@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<br>
 
 <p>
   <strong>Title:</strong>
@@ -12,12 +12,24 @@
 
 <p>
   <strong>Screenshot:</strong>
-      <%= image_tag @bug.screenshot.url if @bug.screenshot? %>
+      <%= image_tag  @bug.screenshot.url if @bug.screenshot? %>
 </p>
 <p>
   <strong>Type:</strong>
   <%= @bug.bugtype %>
 </p>
+<p>
+  <strong>Status:</strong>
+  <%= @bug.status %>
+</p>
+<p>
+  <strong>Project:</strong>
+  <%= @bug.project.name %>
+</p>
+<p>
+  <strong>Developer:</strong>
+  <%= @bug.user.name %>
+</p>
 <br>
-<%= link_to 'Edit', edit_bug_path(@bug) %> |
-<%= link_to 'Back', bugs_path %>
+<%=link_to '<button type="button">Edit</button>'.html_safe, edit_bug_path(@bug)%>
+<%=link_to '<button type="button">Back</button>'.html_safe, bugs_path%>

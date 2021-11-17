@@ -1,12 +1,13 @@
-User.create!(
-name: "dev1",
-email:"1dev@gmail.com",
+3.times do |dev|
+	User.create!(
+name: "dev #{dev}",
+email:"#{dev}dev@gmail.com",
 password: "123asd",
 password_confirmation: "123asd",
 user_type: 0
 		)
-
-puts "1 developer created"
+end
+puts "3 developer created"
 
 User.create!(
 name: "qa1",
@@ -29,24 +30,54 @@ user_type: 2
 puts "1 Manager created"
 
 
-Project.create!(
-name: "proj1"
-		)
-
-puts "1 Project created"
-
-
-3.times do |bug|
-
-	Bug.create!(
-		title: "bug #{bug}",
-		description:"description #{bug}",
-		screenshot: "ss #{bug}",
-		bugtype: false
+4.times do |proj|
+	Project.create!(
+name: "proj#{proj}"
 		)
 end
+puts "4 Project created"
 
-puts "3 Bugs created"
+
+# 2.times do |bug|
+
+# 	Bug.create!(
+# 		title: "bug #{bug}",
+# 		description:"description #{bug}",
+# 		screenshot: "ss #{bug}",
+# 		bugtype: false,
+# 		status: "new",
+# 		user_id:@User,
+# 		project_id: 0
+# 		)
+# end
+
+# 2.times do |bug|
+
+# 	Bug.create!(
+# 		title: "bug #{bug}",
+# 		description:"description #{bug}",
+# 		screenshot: "ss #{bug}",
+# 		bugtype: false,
+# 		status: "new",
+# 		user_id:1,
+# 		project_id: 1
+# 		)
+# end
+
+# 1.times do |bug|
+
+# 	Bug.create!(
+# 		title: "bug #{bug}",
+# 		description:"description #{bug}",
+# 		screenshot: "ss #{bug}",
+# 		bugtype: false,
+# 		status: "new",
+# 		user_id:2,
+# 		project_id: 0
+# 		)
+# end
+
+# puts "5 Bugs created"
 
 =begin
 3.times do |dev|
