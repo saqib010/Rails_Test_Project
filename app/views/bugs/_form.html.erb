@@ -1,46 +1,94 @@
 <%= form_with(model: bug) do |form| %>
-<br>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-<br>
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-<br>
-  <div class="actions">
-    <%= form.label :screenshot %>
-    <%= form.file_field :screenshot %>
-  </div>
-<br>
+  <% if bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bug.errors.count, "error") %></h2>
 
-<div class="field">
-  <%= form.label "Project :: " %>
-  <%= form.collection_select(:project_id, Project.all, :id, :name, :prompt => 'Select a Project') %>
-</div>
-<br>
-<div class="field">
-  <%= form.label "Developer :: " %>
-  <%= form.collection_select(:user_id, User.developer, :id, :name, :prompt => 'Select a Developer') %>
-</div>
-<br>
-  <div class="field">
-    <%= form.label :"Bugtype :: " %>
-    <%= form.select :bugtype, (Bug.bugtypes.keys) %>
-  </div>
-<br>
-
-<div class="field">
-    <%= form.label :"Status :: " %>
-    <%= form.select :status, (["new","started","completed","resolved"]) %>
-</div>
-
-
+      <ul>
+        <% bug.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <br>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  <% if current_user.developer?%>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title , disabled: true%>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description , disabled: true%>
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.label :screenshot %>
+      <%= form.file_field :screenshot , disabled: true%>
+    </div>
+    <br>
+<!--
+    <div class="field">
+      <%= form.label "Project :: " %>
+      <%= form.collection_select(:project_id, Project.all, :id, :name, :prompt => 'Select a Project')%>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label "Developer :: " %>
+      <%= form.collection_select(:user_id, User.developer, :id, :name, :prompt => 'Select a Developer')%>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :"Bugtype :: " %>
+      <%= form.select :bugtype, (Bug.bugtypes.keys)%>
+    </div>
+    <br>
+  -->
+    <div class="field">
+      <%= form.label :"Status :: " %>
+      <%= form.select :status, (["new","started","completed","resolved"]) %>
+    </div>
 
+  <% else %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title%>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= form.label :screenshot %>
+      <%= form.file_field :screenshot %>
+    </div>
+    <br>
+
+    <div class="field">
+      <%= form.label "Project :: " %>
+      <%= form.collection_select(:project_id, Project.all, :id, :name, :prompt => 'Select a Project') %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label "Developer :: " %>
+      <%= form.collection_select(:user_id, User.developer, :id, :name, :prompt => 'Select a Developer') %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :"Bugtype :: " %>
+      <%= form.select :bugtype, (Bug.bugtypes.keys) %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :"Status :: " %>
+      <%= form.select :status, (["new","started","completed","resolved"]) %>
+    </div>
+
+  <% end %>
+  <br>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+<% end %>

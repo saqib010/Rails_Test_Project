@@ -1,5 +1,6 @@
 <h1><%= @projectName %> Bugs</h1>
-
+<h3>Assigned Bugs</h3>
+<% if @projects.any? %>
 <table>
   <thead>
     <tr>
@@ -26,7 +27,6 @@
     <% end %>
   </tbody>
 </table>
+<% else %> 0 bug Assigned to This Project!
 
-<br>
-<br>
-<%=link_to '<button type="button">Back</button>'.html_safe, projects_path%>
+<% end %>

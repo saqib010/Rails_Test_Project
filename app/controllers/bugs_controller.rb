@@ -1,8 +1,19 @@
 class BugsController < ApplicationController
+
   before_action :set_bug, only: %i[ show edit update destroy ]
+  load_and_authorize_resource :nested => :bug
+  load_and_authorize_resource param_method: :my_sanitizer
   # GET /bugs or /bugs.json
   def index
-    @bugs = Bug.all
+    if !current_user.developer?
+      @bugs = Bug.all
+    else
+      render(
+        html: "<script>alert('UnAuthorized Access!')</script>".html_safe,
+        layout: 'application'
+      )
+   
+    end
   end
 
   # GET /bugs/1 or /bugs/1.json
@@ -11,11 +22,13 @@ class BugsController < ApplicationController
 
   # GET /bugs/new
   def new
+    authorize! :create, @bug
     @bug = Bug.new
   end
 
   # GET /bugs/1/edit
   def edit
+    authorize! :update, @bug
   end
 
   # POST /bugs or /bugs.json
@@ -33,6 +46,7 @@ class BugsController < ApplicationController
 
   # PATCH/PUT /bugs/1 or /bugs/1.json
   def update
+    authorize! :update, @bug
     respond_to do |format|
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: "Bug was successfully updated." }
@@ -40,10 +54,12 @@ class BugsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
+
+
   end
 
-  # DELETE /bugs/1 or /bugs/1.json
   def destroy
+    authorize! :destroy, @bug
     @bug.destroy
     respond_to do |format|
       format.html { redirect_to bugs_url, notice: "Bug was successfully destroyed." }
@@ -60,4 +76,11 @@ class BugsController < ApplicationController
     def bug_params
       params.require(:bug).permit(:title, :description, :screenshot, :bugtype, :status, :user_id, :project_id)
     end
+
+      private
+
+    def my_sanitizer
+      params.require(:bug).permit(:title, :description, :screenshot, :bugtype, :status, :user_id, :project_id)
+    end
+
 end

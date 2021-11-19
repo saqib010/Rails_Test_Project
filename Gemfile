@@ -60,3 +60,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "form-select"
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
 gem 'friendly_id', '~> 5.4.0'
+gem 'cancancan', '~> 3.3'

@@ -1,28 +1,40 @@
 class ProjectsController < ApplicationController
+  
   before_action :set_project, only: %i[ show edit update destroy ]
+  load_and_authorize_resource :nested => :project
+  load_and_authorize_resource param_method: :my_sanitizer
 
-  # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    if !current_user.developer?
+      @projects = Project.all
+    else
+      render(
+        html: "<script>alert('UnAuthorized Access!')</script>".html_safe,
+        layout: 'application'
+      )
+   
+    end
   end
 
-  # GET /projects/1 or /projects/1.json
   def show
+    authorize! :read, @project
     @projects = set_project.bugs
     @projectName = set_project.name
   end
 
-  # GET /projects/new
+
   def new
+    authorize! :create, @project
     @project = Project.new
   end
 
-  # GET /projects/1/edit
+
   def edit
+    authorize! :update, @project
   end
 
-  # POST /projects or /projects.json
   def create
+    authorize! :create, @project
     @project = Project.new(project_params)
 
     respond_to do |format|
@@ -34,8 +46,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    authorize! :update, @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
@@ -45,8 +57,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1 or /projects/1.json
   def destroy
+    authorize! :destroy, @project
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
@@ -54,7 +66,7 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_project
       @project = Project.friendly.find(params[:id])
     end
@@ -63,4 +75,6 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name)
     end
+
+
 end

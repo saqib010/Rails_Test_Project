@@ -24,9 +24,17 @@
         <td><%= bug.status %></td>
         <td><%= bug.project.name %></td>
         <td><%= bug.user.name %></td>
-        <td><%= link_to 'Show', bug %></td>
-        <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
-        <td><%= button_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <% if can? :read, bug %>
+          <td><%= link_to 'Show', bug %></td>
+        <% end%>
+        <% if can? :update, bug %>
+          <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
+        <%end%>
+        <% if can? :destroy, bug %>
+          <td><%= button_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%end%>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +42,6 @@
 
 <br>
 <br>
-<%=link_to '<button type="button">Add Bug</button>'.html_safe, new_bug_path%>
+<% if can? :create, Bug%>
+  <%=link_to '<button type="button">Add Bug</button>'.html_safe, new_bug_path%>
+<%end%>

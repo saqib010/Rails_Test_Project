@@ -15,9 +15,13 @@
   <% if current_user %>
       <%=link_to '<button type="button">Home</button>'.html_safe, home_path%>
       <%=link_to '<button type="button">Users</button>'.html_safe, userpage_path%>
-      <%=link_to '<button type="button">Projects</button>'.html_safe, projects_path%>
-      <%=link_to '<button type="button">Bugs</button>'.html_safe, bugs_path%>
-      <%=link_to '<button type="button">MyBugs</button>'.html_safe, mybug_path%>
+      <% if !current_user.developer? %>
+        <%=link_to '<button type="button">Projects</button>'.html_safe, projects_path%>
+        <%=link_to '<button type="button">Bugs</button>'.html_safe, bugs_path%>
+      <% else%>
+        <%=link_to '<button type="button">MyBugs</button>'.html_safe, mybug_path%>
+        <%=link_to '<button type="button">MyProjects</button>'.html_safe, myproj_path%>
+      <% end%>
       <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
   <% end %>
       </p>

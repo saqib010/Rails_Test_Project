@@ -1,4 +1,3 @@
-<br>
 
 <p>
   <strong>Title:</strong>
@@ -12,7 +11,7 @@
 
 <p>
   <strong>Screenshot:</strong>
-      <%= image_tag  @bug.screenshot.url if @bug.screenshot? %>
+  <%= image_tag  @bug.screenshot.url if @bug.screenshot? %>
 </p>
 <p>
   <strong>Type:</strong>
@@ -31,5 +30,6 @@
   <%= @bug.user.name %>
 </p>
 <br>
-<%=link_to '<button type="button">Edit</button>'.html_safe, edit_bug_path(@bug)%>
-<%=link_to '<button type="button">Back</button>'.html_safe, bugs_path%>
+<% if can? :update, @bug %>
+  <%=link_to '<button type="button">Edit</button>'.html_safe, edit_bug_path(@bug)%>
+<%end%>

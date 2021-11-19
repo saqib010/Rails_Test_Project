@@ -1,5 +1,5 @@
 <select name="select1" id="select1">
-  <option value="1">feature</option>
+<option value="1">feature</option>
   <option value="2">bug</option>
 </select>
 
